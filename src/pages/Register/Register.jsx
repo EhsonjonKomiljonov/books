@@ -49,7 +49,7 @@ export const Register = () => {
           <RegisterImgBox className="flex items-center justify-center px-9">
             <RegisterImg></RegisterImg>
           </RegisterImgBox>
-          <div className="pt-20 pl-36">
+          <div className="pt-28 pl-36">
             <h1 className="mb-2.5 font-black text-4xl text-black dark:text-white">
               Sign up
             </h1>
