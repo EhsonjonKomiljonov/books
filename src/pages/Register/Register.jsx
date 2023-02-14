@@ -2,21 +2,41 @@ import { ErrorMessage, Field, Form, Formik } from 'formik';
 import { NavLink } from 'react-router-dom';
 import {
   RegisterDesc,
-  RegisterImg,
+  RegisterImgStyle,
   RegisterImgBox,
   RegisterInput,
   RegisterSection,
+  RegisterContentBox,
 } from './register.styles';
 import * as Yup from 'yup';
 import { SendButton } from '../../components/SendButton/SendButton';
-import { useContext } from 'react';
-import { ThemeContext } from '../../context/ThemeContext';
+import { api } from '../../API/api';
+import { useDispatch } from 'react-redux';
+import { setToken } from '../../redux/token/tokenAction';
+import { useNavigate } from 'react-router-dom';
+import { setUser } from '../../redux/user/userAction';
 
 export const Register = () => {
-  const { theme, setTheme } = useContext(ThemeContext);
+  const dispatch = useDispatch();
+
+  const navigate = useNavigate();
+
+  const userRegister = async (val) => {
+    const data = await api.userRegister(val);
+    const dataUser = await api.userData(data.data.token);
+    console.log(dataUser.data);
+    if (data.status === 201) {
+      localStorage.setItem('token', data.data.token);
+      localStorage.setItem('user', JSON.stringify(dataUser.data));
+
+      dispatch(setToken(data.data.token));
+      dispatch(setUser(dataUser.data));
+      navigate('/');
+    }
+  };
 
   const onSubmit = (values) => {
-    console.log(values);
+    userRegister(values);
   };
 
   const initialValues = {
@@ -32,8 +52,8 @@ export const Register = () => {
     last_name: Yup.string().required('Required!'),
     phone: Yup.string()
       .required('Required!')
-      .min(9, 'Phone number should not be less than 9!')
-      .max(13, 'The phone number should not be more than 13!'),
+      .min(7, 'Phone number should not be less than 7!')
+      .max(9, 'The phone number should not be more than 9!'),
     email: Yup.string().required('Required!').email('Enter Email correctly!'),
     password: Yup.string()
       .required('Required!')
@@ -45,11 +65,11 @@ export const Register = () => {
     <>
       <RegisterSection>
         {/* <button onClick={() => setTheme(theme ? '' : 'dark')}>Click</button> */}
-        <div>
+        <div className="container ml-auto">
           <RegisterImgBox className="flex items-center justify-center px-9">
-            <RegisterImg></RegisterImg>
+            <RegisterImgStyle></RegisterImgStyle>
           </RegisterImgBox>
-          <div className="pt-28 pl-36">
+          <RegisterContentBox>
             <h1 className="mb-2.5 font-black text-4xl text-black dark:text-white">
               Sign up
             </h1>
@@ -120,10 +140,10 @@ export const Register = () => {
                     <ErrorMessage name="password" />
                   </span>
                 </div>
-                <SendButton type="submit" btnText="Next step" />
+                <SendButton btnText="Next step" />
               </Form>
             </Formik>
-          </div>
+          </RegisterContentBox>
         </div>
       </RegisterSection>
     </>
