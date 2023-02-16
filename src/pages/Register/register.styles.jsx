@@ -22,11 +22,15 @@ export const RegisterImgStyle = styled.div`
   background-position: center;
 `;
 
-
 export const RegisterContentBox = styled.div`
   padding: 131px 0 0 25%;
-`
+`;
 
+export const RegisterTitle = styled.h1`
+  font-weight: 900;
+  font-size: 36px;
+  line-height: 51px;
+`;
 
 export const RegisterDesc = styled.p`
   font-family: 'Roboto';

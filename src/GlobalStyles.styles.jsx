@@ -1,16 +1,28 @@
 import { createGlobalStyle } from 'styled-components';
+import Searchimg from './assets/images/search-icon.svg';
+import SearchimgDark from './assets/images/search-icon-dark.svg';
+import CardBg1 from './assets/images/card-bg-1.png';
+import CardBg2 from './assets/images/card-bg-2.png';
+import CardBg1Dark from './assets/images/card-bg-1dark.svg';
+import CardBg2Dark from './assets/images/card-bg-2dark.svg';
 
 export const GloabalStyles = createGlobalStyle`
   :root {
     --bg-body: #fff;
     --color-send-btn: #fff;
     --bg-send-btn: #152540;
+    --bgi-search-btn: url(${Searchimg});
+    --bgi1-author-card: url(${CardBg1});
+    --bgi2-author-card: url(${CardBg2});
   }
 
   .dark {
     --bg-body: #191919;
     --color-send-btn: #152540;
     --bg-send-btn: #fff;
+    --bgi-search-btn: url(${SearchimgDark});
+    --bgi1-author-card: url(${CardBg1Dark});
+    --bgi2-author-card: url(${CardBg2Dark});
   }
 
     html {
@@ -29,7 +41,6 @@ export const GloabalStyles = createGlobalStyle`
     flex-direction: column;
     height: 100%;
     margin: 0;
-    font-family: 'Poppins', 'Roboto', sans-serif;
   }
   
   main {
@@ -54,6 +65,13 @@ export const GloabalStyles = createGlobalStyle`
   }
   p {
     margin: 0;
+  }
+
+  .container {
+    width: 100%;
+    max-width: 1280px;
+    margin: 0 auto;
+    padding: 0 20px;
   }
 
 `;

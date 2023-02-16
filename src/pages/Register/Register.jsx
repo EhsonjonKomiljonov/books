@@ -7,6 +7,7 @@ import {
   RegisterInput,
   RegisterSection,
   RegisterContentBox,
+  RegisterTitle,
 } from './register.styles';
 import * as Yup from 'yup';
 import { SendButton } from '../../components/SendButton/SendButton';
@@ -22,9 +23,12 @@ export const Register = () => {
   const navigate = useNavigate();
 
   const userRegister = async (val) => {
-    const data = await api.userRegister(val);
-    const dataUser = await api.userData(data.data.token);
-    console.log(dataUser.data);
+    const data = await api.userRegister(val).catch((err) => console.log(err));
+
+    const dataUser = await api
+      .userData(data.data.token)
+      .catch((err) => console.log(err));
+
     if (data.status === 201) {
       localStorage.setItem('token', data.data.token);
       localStorage.setItem('user', JSON.stringify(dataUser.data));
@@ -70,9 +74,9 @@ export const Register = () => {
             <RegisterImgStyle></RegisterImgStyle>
           </RegisterImgBox>
           <RegisterContentBox>
-            <h1 className="mb-2.5 font-black text-4xl text-black dark:text-white">
+            <RegisterTitle className="mb-2.5 text-black dark:text-white">
               Sign up
-            </h1>
+            </RegisterTitle>
             <RegisterDesc className="text-black dark:text-white">
               Already have an account?{' '}
               <NavLink className="text-link" to="/">

@@ -33,3 +33,17 @@
   src: url('../fonts/poppins-v20-latin-600.woff2') format('woff2'),
     url('../fonts/poppins-v20-latin-600.woff') format('woff');
 }
+
+@font-face {
+  font-display: swap;
+  font-family: 'Style Script';
+  font-style: normal;
+  font-weight: 400;
+  src: url('../fonts/style-script-v7-latin-regular.eot');
+  src: url('../fonts/style-script-v7-latin-regular.eot?#iefix')
+      format('embedded-opentype'),
+    url('../fonts/style-script-v7-latin-regular.woff2') format('woff2'),
+    url('../fonts/style-script-v7-latin-regular.woff') format('woff'),
+    url('../fonts/style-script-v7-latin-regular.ttf') format('truetype'),
+    url('../fonts/style-script-v7-latin-regular.svg#StyleScript');
+}

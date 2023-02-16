@@ -1,5 +1,5 @@
 import { ErrorMessage, Form, Formik } from 'formik';
-import { NavLink } from 'react-router-dom';
+import { NavLink, useNavigate } from 'react-router-dom';
 import {
   LoginDesc,
   LoginImgStyle,
@@ -10,16 +10,36 @@ import {
 } from './login.styles';
 import * as Yup from 'yup';
 import { SendButton } from '../../components/SendButton/SendButton';
-import { useContext } from 'react';
-import { ThemeContext } from '../../context/ThemeContext';
-import axios from 'axios';
+import { api } from '../../API/api';
+import { useDispatch } from 'react-redux';
+import { setToken } from '../../redux/token/tokenAction';
+import { setUser } from '../../redux/user/userAction';
 
 export const Login = () => {
-  const { theme, setTheme } = useContext(ThemeContext);
+  const dispatch = useDispatch();
+  const navigate = useNavigate();
+
+  const userLogin = async (val) => {
+    const data = await api.userLogin(val);
+    const userData = await api
+      .userData(data.data.token)
+      .catch((err) => console.log(err));
+
+    if (data.status === 201) {
+      localStorage.setItem('token', data.data.token);
+      localStorage.setItem('user', JSON.stringify(userData.data));
+
+      console.log(userData.data)
+
+      dispatch(setToken(data.data.token));
+      dispatch(setUser(userData.data));
+
+      navigate('/');
+    }
+  };
 
   const onSubmit = (values) => {
-    // axios.post('http:localhost:5000/user/login');
-    console.log(values);
+    userLogin(values);
   };
 
   const initialValues = {
@@ -38,7 +58,6 @@ export const Login = () => {
   return (
     <div>
       <LoginSection>
-        {/* <button onClick={() => setTheme(theme ? '' : 'dark')}>Click</button> */}
         <div className="container ml-auto">
           <LoginImgBox className="flex items-center justify-center px-9">
             <LoginImgStyle></LoginImgStyle>

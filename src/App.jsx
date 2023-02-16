@@ -1,12 +1,10 @@
 import { useContext } from 'react';
-import { Route, Routes } from 'react-router-dom';
 import { ThemeContext } from './context/ThemeContext';
-import { Home } from './pages/Home/Home';
-import { Login } from './pages/Login/Login';
-import { Register } from './pages/Register/Register';
 import { useDispatch, useSelector } from 'react-redux';
 import { setToken } from './redux/token/tokenAction';
 import { setUser } from './redux/user/userAction';
+import { Private } from './apps/Private/Private';
+import { Public } from './apps/Public/Public';
 
 function App() {
   const dispatch = useDispatch();
@@ -14,32 +12,25 @@ function App() {
   const token = useSelector((state) => state.token.token);
   const { theme } = useContext(ThemeContext);
 
-  dispatch(setToken(localStorage.getItem('token')));
-  dispatch(setUser(JSON.parse(localStorage.getItem('user'))));
-
-  // console.log(useSelector((state) => state.users));
-
+  dispatch(setToken(localStorage.getItem('token')) || '');
+  dispatch(setUser(JSON.parse(localStorage.getItem('user')) || ''));
+  
   if (token) {
     return (
-      <div className={`${theme}`}>
-        <main>
-          <Routes>
-            <Route path="/" element={<Home />} />
-          </Routes>
+      <>
+        <main className={theme}>
+          <Private />
         </main>
-      </div>
+      </>
     );
   }
 
   return (
-    <div className={`${theme}`}>
-      <main>
-        <Routes>
-          <Route path="/" element={<Login />} />
-          <Route path="/register" element={<Register />} />
-        </Routes>
+    <>
+      <main className={theme}>
+        <Public />
       </main>
-    </div>
+    </>
   );
 }
 
