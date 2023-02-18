@@ -6,16 +6,17 @@ import { api } from '../../API/api';
 import { SearchBooksContext } from '../../context/SearchBooksContext';
 import { BookCard } from '../../components/BookCard/BookCard';
 import { ActivePageContext } from '../../context/ActivePageContext';
+import { BooksSort } from '../../components/BooksSort/BooksSort';
 
 export const Books = () => {
   const { activePage, setActivePage } = useContext(ActivePageContext);
-  
+
   const { books, setBooks } = useContext(SearchBooksContext);
 
   useEffect(() => {
     setActivePage(false);
   }, []);
-  
+
   return (
     <>
       <Header />
@@ -27,6 +28,7 @@ export const Books = () => {
         set={setBooks}
         search={books}
       />
+      <BooksSort />
     </>
   );
 };

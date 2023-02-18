@@ -1,40 +1,84 @@
-import React, { useState } from 'react';
+import React, { useContext, useRef, useState } from 'react';
 import { AuthorCard } from '../AuthorCard/AuthorCard';
 import { BookCard } from '../BookCard/BookCard';
 import { SearchBox, SearchBtn } from './search.styles';
+import { lang } from '../../lang/lang';
+import { LocalizationContext } from '../../context/LocalizationContext';
 
 export const Search = ({ get, set, search, activePage }) => {
-  const [input, setInput] = useState('');
+  const inputRef = useRef();
+
+  const { lang: language } = useContext(LocalizationContext);
 
   const getData = async (val) => {
-    const data = await get(val).catch((err) =>
-      set({ isError: err.message, isLoading: false, data: [] })
-    );
+    if (
+      inputRef.current?.value != '' &&
+      inputRef.current?.value != ' ' &&
+      inputRef.current?.value != '  ' &&
+      inputRef.current?.value != '   ' &&
+      inputRef.current?.value != '    ' &&
+      inputRef.current?.value != '     ' &&
+      inputRef.current?.value != '      ' &&
+      inputRef.current?.value != '       ' &&
+      inputRef.current?.value != '        ' &&
+      inputRef.current?.value != '         ' &&
+      inputRef.current?.value != '          ' &&
+      inputRef.current?.value != '           ' &&
+      inputRef.current?.value != '            ' &&
+      inputRef.current?.value != '             ' &&
+      inputRef.current?.value != '              ' &&
+      inputRef.current?.value != '               ' &&
+      inputRef.current?.value != '                ' &&
+      inputRef.current?.value != '                 ' &&
+      inputRef.current?.value != '                  ' &&
+      inputRef.current?.value != '                   ' &&
+      inputRef.current?.value != '                    ' &&
+      inputRef.current?.value != '                     ' 
+    ) {
+      const data = await get(val).catch((err) =>
+        set({ isError: err.message, isLoading: false, data: [] })
+      );
 
-    if (data.status === 201) {
-      set({ isLoading: false, isError: '', data: data.data });
+      if (data.status === 201) {
+        set({ isLoading: false, isError: '', data: data.data });
+      }
+    } else {
+      set({
+        isError: 'Qidirish uchun nimadur kiriting!!',
+        isLoading: false,
+        data: [],
+      });
     }
+
+    console.log(data);
   };
 
   const onSubmit = (evt) => {
     set({ isLoading: true, isError: '', data: [] });
     evt.preventDefault();
-    getData(input);
+    getData(inputRef.current.value);
   };
+
   return (
     <section className="relative">
       <div className="container">
         <SearchBox
           className={
-            (input.length && search.data.length) ||
-            (input.length && search.isError) ||
-            (input.length && search.isLoading)
+            (inputRef.current?.value.length && search.data.length) ||
+            (inputRef.current?.value.length && search.isError) ||
+            (inputRef.current?.value.length && search.isLoading) ||
+            search.isError ||
+            search.isLoading
               ? 'rounded-2xl bg-white dark:bg-bgDark true'
               : 'rounded-2xl bg-white dark:bg-bgDark'
           }
         >
-          <h2 className="text-center font-poppins text-3xl text-profileLink">
-            Qidirish
+          <h2
+            className={`text-center ${
+              lang.ru ? 'font-normal' : 'font-poppins'
+            }  text-3xl text-profileLink`}
+          >
+            {lang[language].HomePage.main.search.searchTitle}
           </h2>
           <form
             onSubmit={onSubmit}
@@ -42,22 +86,28 @@ export const Search = ({ get, set, search, activePage }) => {
             className="mx-auto mt-2"
           >
             <input
-              onChange={(evt) => setInput(evt.target?.value)}
+              ref={inputRef}
               style={{ width: '710px' }}
-              className="font-poppins py-3 px-6 text-base rounded-2xl outline-none focus:outline-orange-300 mr-4 bg-searchBg dark:bg-searchBgDark text-searchPlaceholder dark:text-searchPlaceholderDark"
+              className={`${
+                lang.ru ? 'font-normal' : 'font-poppins'
+              }  py-3 px-6 text-base rounded-2xl outline-none focus:outline-orange-300 mr-4 bg-searchBg dark:bg-searchBgDark text-searchPlaceholder dark:text-searchPlaceholderDark`}
               type="text"
               name="author"
-              placeholder="Adiblar, kitoblar, audiolar, maqolalar..."
+              placeholder={
+                lang[language].HomePage.main.search.searchInputPlaceholder
+              }
             />
             <SearchBtn
-              className="bg-profileLink dark:text-searchDark py-3 w-40 text-right pr-11 text-base font-poppins text-searchBtn rounded-2xl"
+              className={`bg-profileLink dark:text-searchDark py-3 w-40 text-right pr-11 text-base ${
+                lang.ru ? 'font-normal' : 'font-poppins'
+              }  text-searchBtn rounded-2xl`}
               type="submit"
             >
-              izlash
+              {lang[language].HomePage.main.search.searchBtn}
             </SearchBtn>
           </form>
         </SearchBox>
-        {activePage && input.length && search.data.length ? (
+        {activePage && inputRef.current?.value?.length && search.data.length ? (
           <ul
             onClick={(evt) => console.log(evt)}
             className="flex items-center justify-between flex-wrap mt-48"
@@ -71,7 +121,9 @@ export const Search = ({ get, set, search, activePage }) => {
         ) : (
           ''
         )}
-        {!activePage && input.length && search.data.length ? (
+        {!activePage &&
+        inputRef.current?.value?.length &&
+        search.data.length ? (
           <ul className="flex items-center justify-between flex-wrap mt-48">
             {search.data.map((item) => (
               <li key={item.id} className="mb-6">

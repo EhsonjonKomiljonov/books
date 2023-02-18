@@ -16,6 +16,7 @@ import { useDispatch } from 'react-redux';
 import { setToken } from '../../redux/token/tokenAction';
 import { useNavigate } from 'react-router-dom';
 import { setUser } from '../../redux/user/userAction';
+import { toast, ToastContainer } from 'react-toastify';
 
 export const Register = () => {
   const dispatch = useDispatch();
@@ -23,10 +24,18 @@ export const Register = () => {
   const navigate = useNavigate();
 
   const userRegister = async (val) => {
-    const data = await api.userRegister(val).catch((err) => console.log(err));
+    const data = await api
+      .userRegister(val)
+      .catch((err) =>
+        toast.error(
+          err.response?.data?.message === 'This email already exists'
+            ? 'Bunday emaildagi user mavjud!'
+            : ''
+        )
+      );
 
     const dataUser = await api
-      .userData(data.data.token)
+      .userData(data?.data?.token)
       .catch((err) => console.log(err));
 
     if (data.status === 201) {
@@ -68,7 +77,6 @@ export const Register = () => {
   return (
     <>
       <RegisterSection>
-        {/* <button onClick={() => setTheme(theme ? '' : 'dark')}>Click</button> */}
         <div className="container ml-auto">
           <RegisterImgBox className="flex items-center justify-center px-9">
             <RegisterImgStyle></RegisterImgStyle>
@@ -148,6 +156,18 @@ export const Register = () => {
               </Form>
             </Formik>
           </RegisterContentBox>
+          <ToastContainer
+            position="top-right"
+            autoClose={3000}
+            hideProgressBar={false}
+            newestOnTop={false}
+            closeOnClick
+            rtl={false}
+            pauseOnFocusLoss
+            draggable
+            pauseOnHover
+            theme="dark"
+          />
         </div>
       </RegisterSection>
     </>

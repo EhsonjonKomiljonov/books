@@ -25,7 +25,7 @@ export const CarouselImgBox = styled.div`
 
 export const CarouselTitleBox = styled.div`
   position: absolute;
-  bottom: 100px;
+  bottom: 75px;
   left: 86px;
   width: 337px;
 `;
@@ -33,7 +33,7 @@ export const CarouselTitleBox = styled.div`
 export const CarouselTitle = styled.h2`
   font-family: 'Courier New', Courier, monospace;
   font-weight: 400;
-  font-size: 61px;
+  font-size: 55px;
   line-height: 67px;
   color: #d1b89d;
 `;

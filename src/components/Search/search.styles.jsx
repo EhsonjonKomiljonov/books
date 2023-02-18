@@ -10,7 +10,7 @@ export const SearchBox = styled.div`
   box-shadow: 0px 4px 77px #0000003f;
 
   &.true {
-    top: -270px;
+    top: -272px;
   }
 `;
 

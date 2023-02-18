@@ -20,7 +20,17 @@ module.exports = {
         colorCardDate: '#ffffff99',
         bgDarkAdd: '#1b1b1b',
         bgDarkAddImg: '#4d4d4d',
-        colorSort: '#0d0d0d99'
+        colorSort: '#0d0d0d99',
+        profileEditHeaderDark: '#2D2D2D',
+        profileEditHeader: '#f3f6f9',
+        profileFormBorder: '#ECF0F3',
+        profilePlaceholderColor: '#08d908',
+        editProfileInput: '#F3F6F9',
+        editProfileLabel: '#464E5F',
+        editProfileSpan: '#B5B5C3',
+        editProfileSpanDark: '#161616',
+        editSendBtn: '#152540',
+        editColorTitleDark: '#DEDEDE'
       },
       fontFamily: {
         poppins: ['Poppins'],

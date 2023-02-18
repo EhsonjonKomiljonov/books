@@ -1,5 +1,5 @@
 import { ErrorMessage, Field, Form, Formik } from 'formik';
-import React, { useEffect, useRef, useState } from 'react';
+import React, { useContext, useEffect, useRef, useState } from 'react';
 import { useSelector } from 'react-redux';
 import { api } from '../../API/api';
 import * as Yup from 'yup';
@@ -14,11 +14,14 @@ import { SendButton } from '../../components/SendButton/SendButton';
 import { ToastContainer, toast } from 'react-toastify';
 import 'react-toastify/dist/ReactToastify.css';
 import { useNavigate } from 'react-router-dom';
+import { lang } from '../../lang/lang';
+import { LocalizationContext } from '../../context/LocalizationContext';
 
 export const AddBook = () => {
   const [fileName, setFileName] = useState('');
   const [changeGenre, setChangeGenre] = useState(false);
   const [changeAddAuthor, setChangeAddAuthor] = useState([]);
+  const { lang: language } = useContext(LocalizationContext);
 
   const token = useSelector((state) => state.token.token);
 
@@ -120,21 +123,27 @@ export const AddBook = () => {
   };
 
   return (
-    <AddBookSection>
+    <AddBookSection style={{ height: '100vh' }}>
       <AddBookFileUploadBox className="dark:bg-bgDarkAdd">
-        <AddBookFileUpload className="dark:bg-bgDarkAddImg">
+        <AddBookFileUpload className="dark:bg-bgDarkAddImg dark:border-dashed dark:border-opacity-60 dark:border-white">
           <input
             onChange={(evt) => setFileName(evt.target?.files[0]?.name)}
             ref={fileUploadRef}
             type="file"
           />
-          <p>Click or drag file to this area to upload</p>
+          <p className="dark:text-white dark:opacity-60">
+            {lang[language].AddFileUploadText}
+          </p>
         </AddBookFileUpload>
         <FileName>{fileName}</FileName>
       </AddBookFileUploadBox>
       <div className="pl-32 pt-11">
-        <h2 className="text-4xl font-poppins font-black dark:text-white">
-          Add Book
+        <h2
+          className={`text-4xl ${
+            lang.ru ? 'font-normal' : 'font-poppins'
+          } font-black dark:text-white`}
+        >
+          {lang[language].AddBookPage.AddBookTitle}
         </h2>
         <Formik
           validationSchema={validationSchema}
@@ -144,45 +153,45 @@ export const AddBook = () => {
           <Form className="mt-3">
             <div className="flex justify-center flex-col mb-4 rounded-xl">
               <Field
-                className="w-80 py-3 px-6 border-2 dark:bg-transparent focus:outline-slate-400 border-neutral-400 rounded-xl"
+                className="w-80 py-3 px-6 border-2 dark:text-white dark:bg-transparent focus:outline-slate-400 border-neutral-400 rounded-xl"
                 name="title"
                 type="text"
-                placeholder="Title"
+                placeholder={lang[language].AddBookPage.AddBookTitleInput}
               />
-              <span className="text-red-700">
+              <span className="text-red-700 text-xs">
                 <ErrorMessage name="title" />
               </span>
             </div>
             <div className="flex justify-center flex-col mb-4 rounded-xl">
               <Field
-                className="w-80 py-3 px-6 border-2 dark:bg-transparent focus:outline-slate-400 border-neutral-400 rounded-xl"
+                className="w-80 py-3 px-6 border-2 dark:text-white dark:bg-transparent focus:outline-slate-400 border-neutral-400 rounded-xl"
                 name="page"
                 type="text"
-                placeholder="Pages"
+                placeholder={lang[language].AddBookPage.AddBookPagesInput}
               />
-              <span className="text-red-700">
+              <span className="text-red-700 text-xs">
                 <ErrorMessage name="page" />
               </span>
             </div>
             <div className="flex justify-center flex-col mb-4 rounded-xl">
               <Field
-                className="w-80 py-3 px-6 border-2 dark:bg-transparent focus:outline-slate-400 border-neutral-400 rounded-xl"
+                className="w-80 py-3 px-6 border-2 dark:text-white dark:bg-transparent focus:outline-slate-400 border-neutral-400 rounded-xl"
                 name="year"
                 type="text"
-                placeholder="Year"
+                placeholder={lang[language].AddBookPage.AddBookYearInput}
               />
-              <span className="text-red-700">
+              <span className="text-red-700 text-xs">
                 <ErrorMessage name="year" />
               </span>
             </div>
             <div className="flex justify-center flex-col mb-4 rounded-xl">
               <Field
-                className="w-80 py-3 px-6 border-2 dark:bg-transparent focus:outline-slate-400 border-neutral-400 rounded-xl"
+                className="w-80 py-3 px-6 border-2 dark:text-white dark:bg-transparent focus:outline-slate-400 border-neutral-400 rounded-xl"
                 name="price"
                 type="text"
-                placeholder="Price"
+                placeholder={lang[language].AddBookPage.AddBookPriceInput}
               />
-              <span className="text-red-700">
+              <span className="text-red-700 text-xs">
                 <ErrorMessage name="price" />
               </span>
             </div>
@@ -198,14 +207,22 @@ export const AddBook = () => {
                 name="genre_id"
               >
                 <option selected disabled>
-                  Genre
+                  {lang[language].AddGenre}
                 </option>
-                <option value="1">Temuriylar davri</option>
-                <option value="2">Sovet davri</option>
-                <option value="3">Mustaqillik davri</option>
-                <option value="4">Jadidlar davri</option>
+                <option value="1">
+                  {lang[language].HomePage.main.mainCategories.categoryTitle1}
+                </option>
+                <option value="2">
+                  {lang[language].HomePage.main.mainCategories.categoryTitle2}
+                </option>
+                <option value="3">
+                  {lang[language].HomePage.main.mainCategories.categoryTitle3}
+                </option>
+                <option value="4">
+                  {lang[language].HomePage.main.mainCategories.categoryTitle4}
+                </option>
               </select>
-              <span className="text-red-700">
+              <span className="text-red-700 text-xs">
                 <ErrorMessage name="genre_id" />
               </span>
             </div>
@@ -217,13 +234,13 @@ export const AddBook = () => {
                 ref={changeAuthorRef}
                 className={
                   changeGenre
-                    ? 'block w-80 py-3 px-6 dark:bg-transparent focus:outline-slate-400 text-neutral-400 border-2 border-neutral-300 rounded-xl appearance-none'
+                    ? 'block w-80 py-3 px-6 dark:bg-transparent focus:outline-slate-400 text-neutral-400 border-2  border-neutral-300 rounded-xl appearance-none'
                     : 'hidden'
                 }
                 name="author"
               >
                 <option selected disabled>
-                  Author
+                  {lang[language].AddBookPage.AddBookAuthor}
                 </option>
                 {changeAddAuthor.length
                   ? changeAddAuthor.map((item) => (
@@ -233,24 +250,24 @@ export const AddBook = () => {
                     ))
                   : ''}
               </select>
-              <span className="text-red-700">
+              <span className="text-red-700 text-xs">
                 <ErrorMessage name="author" />
               </span>
             </div>
             <div className="flex justify-center flex-col mt-4 mb-4 rounded-xl">
               <textarea
                 style={{ resize: 'none' }}
-                className="w-80 h-24 dark:bg-transparent py-3 px-6 border-2 focus:outline-slate-400 border-neutral-300 rounded-xl"
+                className="w-80 h-24 dark:bg-transparent py-3 px-6 border-2 dark:text-white focus:outline-slate-400 border-neutral-300 rounded-xl"
                 ref={textAreaRef}
                 name="description"
-                placeholder="Description"
+                placeholder={lang[language].AddBookPage.AddBookDescInput}
                 cols="30"
               ></textarea>
-              <span className="text-red-700">
+              <span className="text-red-700 text-xs">
                 <ErrorMessage name="description" />
               </span>
             </div>
-            <SendButton btnText="Create" />
+            <SendButton btnText={lang[language].AddSendBtn} />
           </Form>
         </Formik>
       </div>

@@ -1,0 +1,2 @@
+export const SET_DARK_MODE = 'SET_DARK_MODE'
+export const REMOVE_DARK_MODE = 'REMOVE_DARK_MODE'

@@ -1,4 +1,4 @@
-import React from 'react';
+import React, { useContext } from 'react';
 import Slider from 'react-slick';
 import {
   CarouselBox,
@@ -6,8 +6,12 @@ import {
   CarouselTitle,
   CarouselTitleBox,
 } from './carousel.styled';
+import { lang } from '../../lang/lang';
+import { LocalizationContext } from '../../context/LocalizationContext';
 
 export const Courusel = () => {
+  const { lang: language } = useContext(LocalizationContext);
+
   let settings = {
     slidesToShow: 1,
     slidesToScroll: 1,
@@ -21,22 +25,166 @@ export const Courusel = () => {
         <Slider {...settings}>
           <CarouselImgBox>
             <CarouselTitleBox>
-              <CarouselTitle>Temuriylar davri adabiyoti</CarouselTitle>
+              <CarouselTitle>
+                {lang[language].HomePage.main.slider.SliderTitle1}
+                <div className="flex items-center mt-2">
+                  <span
+                    className="mr-3"
+                    style={{
+                      width: '60px',
+                      height: '3px',
+                      backgroundColor: 'rgb(255, 255, 255)',
+                    }}
+                  ></span>
+                  <span
+                    className="mr-3"
+                    style={{
+                      width: '60px',
+                      height: '3px',
+                      backgroundColor: 'rgba(255, 255, 255, 0.6)',
+                    }}
+                  ></span>
+                  <span
+                    className="mr-3"
+                    style={{
+                      width: '60px',
+                      height: '3px',
+                      backgroundColor: 'rgba(255, 255, 255, 0.6)',
+                    }}
+                  ></span>
+                  <span
+                    className="mr-3"
+                    style={{
+                      width: '60px',
+                      height: '3px',
+                      backgroundColor: 'rgba(255, 255, 255, 0.6)',
+                    }}
+                  ></span>
+                </div>
+              </CarouselTitle>
             </CarouselTitleBox>
           </CarouselImgBox>
           <CarouselImgBox>
             <CarouselTitleBox>
-              <CarouselTitle>Jadidlar davri adabiyoti</CarouselTitle>
+              <CarouselTitle>
+                {lang[language].HomePage.main.slider.SliderTitle2}
+                <div className="flex items-center mt-2">
+                  <span
+                    className="mr-3"
+                    style={{
+                      width: '60px',
+                      height: '3px',
+                      backgroundColor: 'rgba(255, 255, 255, 0.6)',
+                    }}
+                  ></span>
+                  <span
+                    className="mr-3"
+                    style={{
+                      width: '60px',
+                      height: '3px',
+                      backgroundColor: 'rgb(255, 255, 255)',
+                    }}
+                  ></span>
+                  <span
+                    className="mr-3"
+                    style={{
+                      width: '60px',
+                      height: '3px',
+                      backgroundColor: 'rgba(255, 255, 255, 0.6)',
+                    }}
+                  ></span>
+                  <span
+                    className="mr-3"
+                    style={{
+                      width: '60px',
+                      height: '3px',
+                      backgroundColor: 'rgba(255, 255, 255, 0.6)',
+                    }}
+                  ></span>
+                </div>
+              </CarouselTitle>
             </CarouselTitleBox>
           </CarouselImgBox>
           <CarouselImgBox>
             <CarouselTitleBox>
-              <CarouselTitle>Sovet davri adabiyoti</CarouselTitle>
+              <CarouselTitle>
+                {lang[language].HomePage.main.slider.SliderTitle3}
+                <div className="flex items-center mt-2">
+                  <span
+                    className="mr-3"
+                    style={{
+                      width: '60px',
+                      height: '3px',
+                      backgroundColor: 'rgba(255, 255, 255, 0.6)',
+                    }}
+                  ></span>
+                  <span
+                    className="mr-3"
+                    style={{
+                      width: '60px',
+                      height: '3px',
+                      backgroundColor: 'rgba(255, 255, 255, 0.6)',
+                    }}
+                  ></span>
+                  <span
+                    className="mr-3"
+                    style={{
+                      width: '60px',
+                      height: '3px',
+                      backgroundColor: 'rgb(255, 255, 255)',
+                    }}
+                  ></span>
+                  <span
+                    className="mr-3"
+                    style={{
+                      width: '60px',
+                      height: '3px',
+                      backgroundColor: 'rgba(255, 255, 255, 0.6)',
+                    }}
+                  ></span>
+                </div>
+              </CarouselTitle>
             </CarouselTitleBox>
           </CarouselImgBox>
           <CarouselImgBox>
             <CarouselTitleBox>
-              <CarouselTitle>Mustaqillik davri adabiyoti</CarouselTitle>
+              <CarouselTitle>
+                {lang[language].HomePage.main.slider.SliderTitle4}
+                <div className="flex items-center mt-2">
+                  <span
+                    className="mr-3"
+                    style={{
+                      width: '60px',
+                      height: '3px',
+                      backgroundColor: 'rgba(255, 255, 255, 0.6)',
+                    }}
+                  ></span>
+                  <span
+                    className="mr-3"
+                    style={{
+                      width: '60px',
+                      height: '3px',
+                      backgroundColor: 'rgba(255, 255, 255, 0.6)',
+                    }}
+                  ></span>
+                  <span
+                    className="mr-3"
+                    style={{
+                      width: '60px',
+                      height: '3px',
+                      backgroundColor: 'rgba(255, 255, 255, 0.6)',
+                    }}
+                  ></span>
+                  <span
+                    className="mr-3"
+                    style={{
+                      width: '60px',
+                      height: '3px',
+                      backgroundColor: 'rgb(255, 255, 255)',
+                    }}
+                  ></span>
+                </div>
+              </CarouselTitle>
             </CarouselTitleBox>
           </CarouselImgBox>
         </Slider>

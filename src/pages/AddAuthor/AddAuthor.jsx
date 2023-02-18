@@ -1,5 +1,5 @@
 import { ErrorMessage, Field, Form, Formik } from 'formik';
-import React, { useRef, useState } from 'react';
+import React, { useContext, useRef, useState } from 'react';
 import { useSelector } from 'react-redux';
 import { api } from '../../API/api';
 import * as Yup from 'yup';
@@ -14,10 +14,13 @@ import { SendButton } from '../../components/SendButton/SendButton';
 import { ToastContainer, toast } from 'react-toastify';
 import 'react-toastify/dist/ReactToastify.css';
 import { useNavigate } from 'react-router-dom';
+import { lang } from '../../lang/lang';
+import { LocalizationContext } from '../../context/LocalizationContext';
 
 export const AddAuthor = () => {
   const [fileName, setFileName] = useState('');
   const token = useSelector((state) => state.token.token);
+  const { lang: language } = useContext(LocalizationContext);
 
   const fileUploadRef = useRef();
   const selectValRef = useRef();
@@ -107,19 +110,25 @@ export const AddAuthor = () => {
   return (
     <AddAuthorSection>
       <AddAuthorFileUploadBox className="dark:bg-bgDarkAdd">
-        <AddAuthorFileUpload className='dark:bg-bgDarkAddImg' >
+        <AddAuthorFileUpload className="dark:bg-bgDarkAddImg">
           <input
             onChange={(evt) => setFileName(evt.target?.files[0]?.name)}
             ref={fileUploadRef}
             type="file"
           />
-          <p>Click or drag file to this area to upload</p>
+          <p className="dark:text-white dark:opacity-60">
+            {lang[language].AddFileUploadText}
+          </p>
         </AddAuthorFileUpload>
         <FileName>{fileName}</FileName>
       </AddAuthorFileUploadBox>
       <div className="pl-32 pt-11">
-        <h2 className="text-4xl font-poppins font-black dark:text-white">
-          Add Author
+        <h2
+          className={`text-4xl ${
+            lang.ru ? 'font-normal' : 'font-poppins'
+          } font-black dark:text-white`}
+        >
+          {lang[language].AddAuthorPage.AddAuthorTitle}
         </h2>
         <Formik
           validationSchema={validationSchema}
@@ -129,56 +138,64 @@ export const AddAuthor = () => {
           <Form className="mt-3">
             <div className="flex justify-center flex-col mb-4 rounded-xl">
               <Field
-                className="w-80 py-3 px-6 border-2 dark:bg-transparent focus:outline-slate-400 border-neutral-400 rounded-xl"
+                className="w-80 py-3 px-6 border-2 dark:bg-transparent dark:text-white focus:outline-slate-400 border-neutral-400 rounded-xl"
                 name="first_name"
                 type="text"
-                placeholder="First name"
+                placeholder={
+                  lang[language].AddAuthorPage.AddAuthorFirstNameInput
+                }
               />
-              <span className="text-red-700">
+              <span className="text-red-700 text-xs">
                 <ErrorMessage name="first_name" />
               </span>
             </div>
             <div className="flex justify-center flex-col mb-4 rounded-xl">
               <Field
-                className="w-80 py-3 px-6 border-2 dark:bg-transparent focus:outline-slate-400 border-neutral-400 rounded-xl"
+                className="w-80 py-3 px-6 border-2 dark:bg-transparent dark:text-white focus:outline-slate-400 border-neutral-400 rounded-xl"
                 name="last_name"
                 type="text"
-                placeholder="Last name"
+                placeholder={
+                  lang[language].AddAuthorPage.AddAuthorLastNameInput
+                }
               />
-              <span className="text-red-700">
+              <span className="text-red-700 text-xs">
                 <ErrorMessage name="last_name" />
               </span>
             </div>
             <div className="flex justify-center flex-col mb-4 rounded-xl">
               <Field
-                className="w-80 py-3 px-6 border-2 dark:bg-transparent focus:outline-slate-400 border-neutral-400 rounded-xl"
+                className="w-80 py-3 px-6 border-2 dark:bg-transparent dark:text-white focus:outline-slate-400 border-neutral-400 rounded-xl"
                 name="date_of_birth"
                 type="text"
-                placeholder="Date of birth"
+                placeholder={
+                  lang[language].AddAuthorPage.AddAuthorDateOfBirthInput
+                }
               />
-              <span className="text-red-700">
+              <span className="text-red-700 text-xs">
                 <ErrorMessage name="date_of_birth" />
               </span>
             </div>
             <div className="flex justify-center flex-col mb-4 rounded-xl">
               <Field
-                className="w-80 py-3 px-6 border-2 dark:bg-transparent focus:outline-slate-400 border-neutral-400 rounded-xl"
+                className="w-80 py-3 px-6 border-2 dark:bg-transparent dark:text-white focus:outline-slate-400 border-neutral-400 rounded-xl"
                 name="date_of_death"
                 type="text"
-                placeholder="Date of death"
+                placeholder={
+                  lang[language].AddAuthorPage.AddAuthorDateOfDeathInput
+                }
               />
-              <span className="text-red-700">
+              <span className="text-red-700 text-xs">
                 <ErrorMessage name="date_of_death" />
               </span>
             </div>
             <div className="flex justify-center flex-col mb-4 rounded-xl">
               <Field
-                className="w-80 py-3 px-6 border-2 dark:bg-transparent focus:outline-slate-400 border-neutral-400 rounded-xl"
+                className="w-80 py-3 px-6 border-2 dark:bg-transparent dark:text-white focus:outline-slate-400 border-neutral-400 rounded-xl"
                 name="country"
                 type="text"
-                placeholder="Country"
+                placeholder={lang[language].AddAuthorPage.AddAuthorCountryInput}
               />
-              <span className="text-red-700">
+              <span className="text-red-700 text-xs">
                 <ErrorMessage name="country" />
               </span>
             </div>
@@ -190,31 +207,39 @@ export const AddAuthor = () => {
                 name="genreId"
               >
                 <option selected disabled>
-                  Genre
+                  {lang[language].AddGenre}
                 </option>
-                <option value="1">Temuriylar davri</option>
-                <option value="2">Sovet davri</option>
-                <option value="3">Mustaqillik davri</option>
-                <option value="4">Jadidlar davri</option>
+                <option value="1">
+                  {lang[language].HomePage.main.mainCategories.categoryTitle1}
+                </option>
+                <option value="2">
+                  {lang[language].HomePage.main.mainCategories.categoryTitle2}
+                </option>
+                <option value="3">
+                  {lang[language].HomePage.main.mainCategories.categoryTitle3}
+                </option>
+                <option value="4">
+                  {lang[language].HomePage.main.mainCategories.categoryTitle4}
+                </option>
               </select>
-              <span className="text-red-700">
+              <span className="text-red-700 text-xs">
                 <ErrorMessage name="genreId" />
               </span>
             </div>
             <div className="flex justify-center flex-col mt-4 mb-4 rounded-xl">
               <textarea
                 style={{ resize: 'none' }}
-                className="w-80 h-24 dark:bg-transparent py-3 px-6 border-2 focus:outline-slate-400 border-neutral-300 rounded-xl"
+                className="w-80 h-24 dark:bg-transparent dark:text-white py-3 px-6 border-2 focus:outline-slate-400 border-neutral-300 rounded-xl"
                 ref={textAreaRef}
                 name="bio"
-                placeholder="Bio"
+                placeholder={lang[language].AddBio}
                 cols="30"
               ></textarea>
-              <span className="text-red-700">
+              <span className="text-red-700 text-xs">
                 <ErrorMessage name="bio" />
               </span>
             </div>
-            <SendButton btnText="Create" />
+            <SendButton btnText={lang[language].AddSendBtn} />
           </Form>
         </Formik>
       </div>

@@ -4,10 +4,8 @@ import ArrowDown from '../../assets/images/arrow-down.svg';
 
 export const HeaderProfileDropDownBtn = styled.button`
   position: relative;
-  padding: 3px 17px;
   border-radius: 50%;
   font-size: 29px;
-  background-color: #08d908;
   color: #fff;
 
   &::after {
@@ -32,7 +30,6 @@ export const HeaderProfileDropDown = styled.ul`
 `;
 
 export const HeaderProfileDropDownLink = styled(NavLink)`
-  font-family: 'Poppins';
   font-weight: 500;
   font-size: 16px;
   line-height: 24px;

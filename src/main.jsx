@@ -13,6 +13,7 @@ import 'slick-carousel/slick/slick-theme.css';
 import { SearchAuthorProvider } from './context/SearchAuthorContext';
 import { SearchBooksProvider } from './context/SearchBooksContext';
 import { ActivePageProvider } from './context/ActivePageContext';
+import { LocalizationProvider } from './context/LocalizationContext';
 
 ReactDOM.createRoot(document.getElementById('root')).render(
   <BrowserRouter>
@@ -22,7 +23,9 @@ ReactDOM.createRoot(document.getElementById('root')).render(
         <SearchAuthorProvider>
           <SearchBooksProvider>
             <ActivePageProvider>
-              <App />
+              <LocalizationProvider>
+                <App />
+              </LocalizationProvider>
             </ActivePageProvider>
           </SearchBooksProvider>
         </SearchAuthorProvider>

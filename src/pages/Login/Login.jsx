@@ -14,22 +14,31 @@ import { api } from '../../API/api';
 import { useDispatch } from 'react-redux';
 import { setToken } from '../../redux/token/tokenAction';
 import { setUser } from '../../redux/user/userAction';
+import { toast, ToastContainer } from 'react-toastify';
 
 export const Login = () => {
   const dispatch = useDispatch();
   const navigate = useNavigate();
 
   const userLogin = async (val) => {
-    const data = await api.userLogin(val);
+    const data = await api
+      .userLogin(val)
+      .catch((err) =>
+        toast.error(
+          err.response?.data?.message === 'Wrong password specified'
+            ? "Parol hato kiritildi! Qaytadan urinib ko'ring!"
+            : 'Bunday emaildagi user mavjud emas!'
+        )
+      );
     const userData = await api
-      .userData(data.data.token)
+      .userData(data?.data?.token)
       .catch((err) => console.log(err));
+
+    console.log(data);
 
     if (data.status === 201) {
       localStorage.setItem('token', data.data.token);
       localStorage.setItem('user', JSON.stringify(userData.data));
-
-      console.log(userData.data)
 
       dispatch(setToken(data.data.token));
       dispatch(setUser(userData.data));
@@ -105,6 +114,18 @@ export const Login = () => {
             </Formik>
           </LoginContentBox>
         </div>
+        <ToastContainer
+          position="top-right"
+          autoClose={3000}
+          hideProgressBar={false}
+          newestOnTop={false}
+          closeOnClick
+          rtl={false}
+          pauseOnFocusLoss
+          draggable
+          pauseOnHover
+          theme="dark"
+        />
       </LoginSection>
     </div>
   );
