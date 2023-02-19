@@ -121,7 +121,11 @@ export const AuthorSinglePage = () => {
           {getAuthor.data ? (
             <div className="flex items-start">
               <img
-                style={{ width: '505px', height: '681px', borderRadius: '20px' }}
+                style={{
+                  width: '505px',
+                  height: '681px',
+                  borderRadius: '20px',
+                }}
                 src={`http://localhost:5000/${getAuthor.data.image}`}
                 alt={getAuthor.data.first_name + ' ' + getAuthor.data.last_name}
               />
@@ -164,9 +168,35 @@ export const AuthorSinglePage = () => {
           )}
 
           {getAuthorBooks.isLoading ? (
-            <h2 className="text-center text-5xl mt-24 text-profileLink font-poppins">
-              Loading...
-            </h2>
+            theme ? (
+              <img
+                style={{
+                  position: 'absolute',
+                  top: '160px',
+                  right: '0',
+                  bottom: '0',
+                  left: '670px',
+                  width: '400px',
+                  height: '400px',
+                }}
+                src={loadingIconDark}
+                alt="Loading..."
+              />
+            ) : (
+              <img
+                style={{
+                  position: 'absolute',
+                  top: '160px',
+                  right: '0',
+                  bottom: '0',
+                  left: '670px',
+                  width: '400px',
+                  height: '400px',
+                }}
+                src={loadingIcon}
+                alt="Loading..."
+              />
+            )
           ) : (
             ''
           )}

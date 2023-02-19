@@ -120,6 +120,7 @@ export const AddBook = () => {
   const changeAuthor = async (id) => {
     const data = await api.setChangeGenre(id);
     setChangeAddAuthor(data.data);
+    console.log(data.data);
   };
 
   return (
@@ -213,13 +214,13 @@ export const AddBook = () => {
                   {lang[language].HomePage.main.mainCategories.categoryTitle1}
                 </option>
                 <option value="2">
-                  {lang[language].HomePage.main.mainCategories.categoryTitle2}
+                  {lang[language].HomePage.main.mainCategories.categoryTitle4}
                 </option>
                 <option value="3">
                   {lang[language].HomePage.main.mainCategories.categoryTitle3}
                 </option>
                 <option value="4">
-                  {lang[language].HomePage.main.mainCategories.categoryTitle4}
+                  {lang[language].HomePage.main.mainCategories.categoryTitle2}
                 </option>
               </select>
               <span className="text-red-700 text-xs">

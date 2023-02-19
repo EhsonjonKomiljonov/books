@@ -26,7 +26,7 @@ export const lang = {
         mainCategories: {
           title: 'Asosiy Kategoriyalar',
           categoryTitle1: 'Temuriylar davri',
-          categoryTitle2: 'Jadidlat davri',
+          categoryTitle2: 'Jadidlar davri',
           categoryTitle3: 'Sovet davri',
           categoryTitle4: 'Mustaqillik davri',
         },

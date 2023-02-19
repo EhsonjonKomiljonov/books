@@ -3,7 +3,8 @@ import { useSelector } from 'react-redux';
 import { NavLink, useParams } from 'react-router-dom';
 import { api } from '../../API/api';
 
-export const BookCard = ({ obj, bookAuthorFirstName, bookAuthorLastName }) => {
+export const BookCard = ({ obj }) => {
+  const { image, title, id } = obj;
   const [getAuthor, setGetAuthor] = useState({
     isLoading: false,
     isError: '',
@@ -11,7 +12,6 @@ export const BookCard = ({ obj, bookAuthorFirstName, bookAuthorLastName }) => {
   });
 
   const token = useSelector((state) => state.token.token);
-  const { image, title, id } = obj;
 
   const getAuthorId = async () => {
     setGetAuthor({
@@ -42,7 +42,7 @@ export const BookCard = ({ obj, bookAuthorFirstName, bookAuthorLastName }) => {
   }, [id]);
 
   return (
-    <NavLink className='mb-6' to={`/books/${id}`}>
+    <NavLink className="mb-6" to={`/books/${id}`}>
       <div>
         <div>
           <img
@@ -57,8 +57,7 @@ export const BookCard = ({ obj, bookAuthorFirstName, bookAuthorLastName }) => {
             {title}
           </h3>
           <p className="font-poppins mt-2 dark:text-white dark:opacity-60">
-            {bookAuthorFirstName ? bookAuthorFirstName : ''}{' '}
-            {bookAuthorLastName ? bookAuthorLastName : ''}
+            {getAuthor.data.first_name} {getAuthor.data.last_name}
           </p>
         </div>
       </div>

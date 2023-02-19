@@ -44,7 +44,6 @@ export const BookSinglePage = () => {
       .catch((err) =>
         setGetBook({ isLoading: false, isError: err.message, data: [] })
       );
-
     if (data.status === 201) {
       setGetBook({
         isLoading: false,
@@ -61,15 +60,17 @@ export const BookSinglePage = () => {
       isError: '',
       data: [],
     });
-
+    
+     
     const data = await api.getAuthorBooks(getAuthorId, token).catch((err) =>
-      setGetAuthorBooks({
-        isLoading: false,
-        isError: err.message,
-        data: [],
-      })
+    setGetAuthorBooks({
+      isLoading: false,
+      isError: err.message,
+      data: [],
+    })
     );
-
+    // console.log(data)
+ 
     if (data.status === 201) {
       setGetAuthorBooks({
         isLoading: false,
@@ -81,8 +82,13 @@ export const BookSinglePage = () => {
 
   useEffect(() => {
     getBookInfo();
-    getBooksAuthor();
+     
   }, []);
+  useEffect(() => {
+     
+    getBooksAuthor();
+  }, [getAuthorId]);
+  console.log(getAuthorId)
 
   return (
     <>
@@ -267,8 +273,6 @@ export const BookSinglePage = () => {
                     <li className="mr-5 w-52">
                       <BookCard
                         obj={item}
-                        bookAuthorLastName={getAuthor.data.last_name}
-                        bookAuthorFirstName={getAuthor.data.first_name}
                       />
                     </li>
                   ))}

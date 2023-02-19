@@ -83,8 +83,8 @@ export const ProfileEdit = () => {
             <label
               style={{ width: '174px', height: '174px' }}
               className={`text-9xl inline-block ${
-                user.image ? '' : 'px-14 pt-5 pb-7 bg-profilePlaceholderColor'
-              } cursor-pointer text-white rounded-full`}
+                user.image ? '' : 'bg-profilePlaceholderColor'
+              } cursor-pointer text-white text-center pt-3 rounded-full`}
             >
               {user.image != null ? (
                 <img
@@ -221,7 +221,7 @@ export const ProfileEdit = () => {
               width: '400px',
               height: '400px',
             }}
-            src={loadingIcon}
+            src={loadingIconDark}
             alt="Loading..."
           />
         ) : (
@@ -235,7 +235,7 @@ export const ProfileEdit = () => {
               width: '400px',
               height: '400px',
             }}
-            src={loadingIconDark}
+            src={loadingIcon}
             alt="Loading..."
           />
         )

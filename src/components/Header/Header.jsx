@@ -100,7 +100,7 @@ export const Header = () => {
                   style={{ width: '49px', height: '49px' }}
                   className={`text-9xl inline-block ${
                     user.image ? '' : 'bg-profilePlaceholderColor'
-                  } cursor-pointer text-white`}
+                  } cursor-pointer text-white pb-1`}
                   onClick={() => handleDropDown()}
                 >
                   {user.image != null ? (
@@ -119,7 +119,7 @@ export const Header = () => {
                     dropDown
                       ? `block absolute bg-drop dark:bg-dropdownDark ${
                           lang.ru ? 'font-normal' : 'font-poppins'
-                        }  rounded-lg py-2 px-6`
+                        }  rounded-lg py-2 px-6 `
                       : 'hidden'
                   }
                 >
