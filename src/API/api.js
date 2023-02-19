@@ -64,14 +64,14 @@ export const api = {
     }),
 
   getTemuriylarAuthors: () => axios.get(BASE_URL + '/author/genreId/1'),
+  getJadidlarAuthors: () => axios.get(BASE_URL + '/author/genreId/2'),
   getSovetAuthors: () => axios.get(BASE_URL + '/author/genreId/3'),
-  getMustaqillikAuthors: () => axios.get(BASE_URL + '/author/genreId/2'),
-  getJadidlarAuthors: () => axios.get(BASE_URL + '/author/genreId/4'),
+  getMustaqillikAuthors: () => axios.get(BASE_URL + '/author/genreId/4'),
 
   // GET SORT BOOKS
 
   getTemuriylarBooks: () => axios.get(BASE_URL + '/book/genreId/1'),
-  getMustaqillikBooks: () => axios.get(BASE_URL + '/book/genreId/2'),
+  getJadidlarBooks: () => axios.get(BASE_URL + '/book/genreId/2'),
   getSovetBooks: () => axios.get(BASE_URL + '/book/genreId/3'),
-  getJadidlarBooks: () => axios.get(BASE_URL + '/book/genreId/4'),
+  getMustaqillikBooks: () => axios.get(BASE_URL + '/book/genreId/4'),
 };
