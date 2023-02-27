@@ -62,6 +62,7 @@ export const GloabalStyles = createGlobalStyle`
   main {
     flex-grow: 1;
     background-color: var(--bg-body);
+    min-height: 100vh;
   }
 
   img {

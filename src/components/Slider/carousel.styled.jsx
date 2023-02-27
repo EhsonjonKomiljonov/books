@@ -34,6 +34,6 @@ export const CarouselTitle = styled.h2`
   font-family: 'Courier New', Courier, monospace;
   font-weight: 400;
   font-size: 55px;
-  line-height: 67px;
+  line-height: 60px;
   color: #d1b89d;
 `;

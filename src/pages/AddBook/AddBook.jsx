@@ -60,15 +60,15 @@ export const AddBook = () => {
           : err.response?.data?.message ===
             'error: invalid input syntax for type integer: "NaN"'
           ? 'Author kiriting!'
+          : err.response?.data?.message ===
+            '"title" length must be less than or equal to 30 characters long'
+          ? "Kitob nomi 30ta harf dan kam bo'lishi kerak"
           : err.response?.data?.message
       );
-      console.log(err);
     });
 
-    console.log(data);
-
-    if (data.status === 201) {
-      toast.success("Muallif qo'shildi");
+    if (data.data) {
+      toast.success("Kitob qo'shildi");
       navigate('/');
     }
   };
@@ -85,7 +85,6 @@ export const AddBook = () => {
     formData.set('genre_id', +selectValRef.current?.value);
     formData.set('description', textAreaRef.current?.value);
 
-    console.log(values);
     postBook(formData);
   };
 
@@ -120,7 +119,6 @@ export const AddBook = () => {
   const changeAuthor = async (id) => {
     const data = await api.setChangeGenre(id);
     setChangeAddAuthor(data.data);
-    console.log(data.data);
   };
 
   return (
